@@ -4,9 +4,13 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: <your_db_name> 
-      POSTGRES_PASSWORD: <your_db_password> 
+      POSTGRES_DB: squid-railgun-fiber-sepolia-v2
+      POSTGRES_PASSWORD: postgres
     ports:
-      - "${DB_PORT}:5432"
-      # command: ["postgres", "-c", "log_statement=all"]
+      - "${DB_PORT:-23798}:5432"
     shm_size: 1gb
+    volumes:
+      - squid-db:/var/lib/postgresql/data
+
+volumes:
+  squid-db:

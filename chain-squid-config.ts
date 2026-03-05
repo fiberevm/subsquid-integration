@@ -59,5 +59,15 @@ export const SQD_CHAIN_CONFIG: { [network: string]: ChainConfig } = {
     rpc_proxy: "eth-sepolia:http",
     rpc_endpoint: "${{secrets.RAILGUN_SEPOLIA_RPC}}",
     dbName: "squid-railgun-eth-sepolia-v2"
+  },
+  fiber_sepolia: {
+    name: "squid-railgun-fiber-sepolia-v2",
+    chainId: "11155111",
+    railgun_proxy_contract: "0x4020Fd6030b62889F2094de97f5F7Abd6933987C",
+    railgun_deployment_block: "10387299",
+    railgun_poseidonT4_contract: "0xfeb4804930B2B9029a5bB1C50628098F5Cf08507",
+    rpc_proxy: "eth-sepolia:http",
+    rpc_endpoint: "${RPC_ENDPOINT}",
+    dbName: "squid-railgun-fiber-sepolia-v2"
   }
 };

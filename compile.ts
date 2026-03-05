@@ -7,6 +7,7 @@ const NETWORKS = new Map<string, string>([
   ["42161", "arbitrum"],
   ["137", "polygon"],
   ["11155111", "sepolia"],
+  ["11155111-fiber", "fiber_sepolia"],
 ]);
 const OUTPUT_DIR = "build/";
 
