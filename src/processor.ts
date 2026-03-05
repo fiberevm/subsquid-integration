@@ -80,11 +80,6 @@ export const processor = new EvmBatchProcessor()
       value: true,
       hash: true,
     },
-    trace: {
-      callTo: true,
-      callSighash: true,
-      callInput: true,
-    },
   })
   .setBlockRange({
     from: parseInt(process.env.RAILGUN_PROXY_DEPLOYMENT_BLOCK || "0"),
@@ -106,19 +101,10 @@ export const processor = new EvmBatchProcessor()
       ].topic,
     ],
     transaction: true,
-  })
-  .addTrace({
-    type: ["call"],
-    callTo: [assertNotNull(process.env.RAILGUN_PROXY_CONTRACT_ADDRESS)],
-    callSighash: [
-      functions[
-        "transact((((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),bytes32,bytes32[],bytes32[],(uint16,uint72,uint8,uint64,address,bytes32,(bytes32[4],bytes32,bytes32,bytes,bytes)[]),(bytes32,(uint8,address,uint256),uint120))[])"
-      ].sighash,
-      functions[
-        "transact((((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),uint256,uint256[],uint256[],(uint16,uint8,address,bytes32,(uint256[4],uint256[2],uint256[])[]),(uint256,(uint8,address,uint256),uint120),address)[])"
-      ].sighash,
-    ],
   });
+  // NOTE: addTrace is disabled to allow free-tier RPC endpoints (no debug_traceBlockByHash).
+  // Trace data is only used to populate the Transaction entity from transact() calls.
+  // All QuickSync data (commitments, nullifiers, shields, unshields) comes from events.
 
 export type Fields = EvmBatchProcessorFields<typeof processor>;
 export type Block = BlockHeader<Fields>;
